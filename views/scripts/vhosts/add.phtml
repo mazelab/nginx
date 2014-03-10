@@ -1,0 +1,85 @@
+<? $this->headScript()->prependFile($this->baseUrl() . '/module/mazelab/nginx/js/codemirror/mode/nginx.js') ?>
+<? $this->headScript()->prependFile($this->baseUrl() . '/module/mazelab/nginx/js/codemirror/codemirror.js') ?>
+<? $this->headLink()->prependStylesheet($this->baseUrl() . '/module/mazelab/nginx/css/codemirror/codemirror.css') ?>
+<div class="row-fluid">
+    <div class="span12">
+        <div class="row-fluid cssBoxCenter jsAddNginx">
+            <form class="row-fluid span10" action="<?= $this->url(array(), 'mazelab-nginx_addVhost') ?>" method="post">
+                <div class="row-fluid">
+                    <div class="cssUserImage span2">
+                        <img name="avatar" class="img-polaroid" src="<?= $this->baseUrl() ?>/img/dummy_domain_200.png" alt="<?= $this->translate('avatar') ?>">
+                    </div>
+                    <div class="span6 offset1">
+                        <div class="row-fluid">
+                            <dl class="span5">
+                                <span><?= $this->form->label->getLabel(); ?></span>
+                            </dl>
+                            <dl class="span7">
+                                <?= $this->form->label; ?>
+                            </dl>
+                        </div>
+                        <div class="row-fluid">
+                            <dl class="span5">
+                                <span><?= $this->form->nodeId->getLabel(); ?></span>
+                            </dl>
+                            <dl class="span7">
+                                <?= $this->form->nodeId; ?>
+                            </dl>
+                        </div>
+                        <div class="row-fluid">
+                            <dl class="span5">
+                                <span><?= $this->form->domainId->getLabel(); ?></span>
+                            </dl>
+                            <dl class="span7">
+                                <?= $this->form->domainId; ?>
+                            </dl>
+                        </div>
+                        <div class="row-fluid">
+                            <dl class="span5">
+                                <span><?= $this->form->status->getLabel(); ?></span>
+                            </dl>
+                            <dl class="span7">
+                                <?= $this->form->status; ?>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <dl class="row-fluid">
+                        <dt class="span3">
+                            <pre class="cssNginxCode">
+<?= $this->translate('Example:'); ?> 
+
+server {
+    listen 8080;
+    server_name test.xy;
+
+    root /var/www;
+
+    # comment
+}
+
+
+</pre>
+                            <input id="jsCancelButton" class="btn btn-info" type="reset" value="<?= $this->translate('cancel') ?>" />
+                            <input class="btn btn-info jsButton" type="submit" value="<?= $this->translate('save') ?>" />
+                        </dt>
+                        <dd class="span8 cssBoxCenter">
+                            <?= $this->form->content; ?>
+                        </dd>
+                    </dl>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#jsCancelButton').click(function() {
+            location.href = '<?= $this->url(array(), 'mazelab-nginx_vhosts'); ?>';
+        });
+    });
+    
+    CodeMirror.fromTextArea(document.getElementById("content"), {mode: "nginx"});
+</script>

@@ -1,0 +1,65 @@
+<? $this->headLink()->prependStylesheet($this->baseUrl() . '/module/mazelab/nginx/css/codemirror/merge.css') ?>
+<? $this->headScript()->prependFile($this->baseUrl() . '/module/mazelab/nginx/js/codemirror/addon/merge.js') ?>
+<? $this->headScript()->prependFile($this->baseUrl() . '/module/mazelab/nginx/js/codemirror/addon/diff_match_patch.js') ?>
+
+<? $this->headScript()->prependFile($this->baseUrl() . '/module/mazelab/nginx/js/codemirror/mode/nginx.js') ?>
+<? $this->headScript()->prependFile($this->baseUrl() . '/module/mazelab/nginx/js/codemirror/codemirror.js') ?>
+<? $this->headLink()->prependStylesheet($this->baseUrl() . '/module/mazelab/nginx/css/codemirror/codemirror.css') ?>
+<div class="row-fluid">
+    <div class="span12">
+        <form class="cssBoxCenter" action="<?= $this->url(array($this->html('local/_id')), 'mazelab-nginx_diffVhost') ?>" 
+              method="post" id="formVhostDiff">
+            <div class="row-fluid">
+                <div class="span4">
+                    <h4>
+                        Maze
+                    </h4>
+                </div>
+                <div class="span4">
+                    <h4>
+                        Merge
+                    </h4>
+                </div>
+                <div class="span4">
+                    <h4>
+                        Node
+                    </h4>
+                </div>
+            </div>
+            <div id="vhostCodeDiff" class="row-fluid cssBoxCenter"></div>
+            <div class="row-fluid">
+                <div style="display:none;">
+                    <?= $this->form->content ?>
+                </div>
+                <input class="btn btn-info" type="submit" id="jsDiffCancel" value="<?= $this->translate('cancel'); ?>">
+                <input class="btn btn-info" type="submit" value="<?= $this->translate('save'); ?>">
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var dv, hilight= true;
+        
+        dv = CodeMirror.MergeView(document.getElementById('vhostCodeDiff'), {
+          origLeft: '<?= addcslashes($this->html('local/content'), "\\\0..\20") ?>',
+          value: '<?= addcslashes($this->html('local/content'), "\\\0..\20") ?>',
+          orig: '<?= addcslashes($this->html('remote/content'), "\\\0..\20") ?>',
+          lineNumbers: true,
+          mode: "nginx",
+          highlightDifferences: hilight
+        });
+        
+        function toggleDifferences() {
+          dv.setShowDifferences(hilight = !hilight);
+        }
+        
+        $('#formVhostDiff').submit(function(){
+            $('#content').val(dv.edit.getValue());
+        });
+        
+        $("jsDiffCancel").on("click", function() {
+            window.history.back();
+        });
+    });
+</script>

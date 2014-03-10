@@ -1,0 +1,49 @@
+/*----------------Nginx Conf + CodeMirror---------------*/
+.CodeMirror-lines, .cssNginxCode {
+	font:normal 12px Monaco,Menlo,Consolas,"Courier New",monospace;
+}
+.CodeMirror-scroll, .jsEditableTextareas.cssNginxCode {
+	border:1px solid #cccccc;
+	border-radius:4px;
+	display:inline-block;
+	margin:-2% 0 0 2%;
+	height:auto;
+	background:transparent;
+	min-height:157px;
+}
+.CodeMirror-scroll {
+	display:block;
+	margin:0;
+}
+.CodeMirror {
+	height:auto;
+}
+.jsEditableTextareas.cssNginxCode.active {
+	border-color:transparent;
+}
+.jsEditableTextareas.cssNginxCode {
+	margin:0;
+}
+/*-------------------Content Liste-------------------*/
+.cssListing ul li {
+    position: relative;
+}
+.cssListing ul li div a.cssIconVHost.ui-state-default{
+    color:#fff;
+    font-weight:400;
+    vertical-align: middle;
+    font-size:10px;
+    background-image: url("../../../../css/js/images/ui-bg_highlight-soft_40_1aa8c9_1x100.png");
+    border:1px solid #1AA8C9;
+}
+.cssListing ul li div a.ui-state-default:last-child {
+    margin-right:0;
+}
+.cssListing ul li div .cssDomain {
+    color: #3E3D3B;
+    font-weight: 600;
+    vertical-align: middle;
+}
+.cssAdditionalLink {
+    text-transform:capitalize;
+}

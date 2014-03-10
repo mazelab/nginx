@@ -1,0 +1,44 @@
+<div class="cssContentMiddle grid_16">
+    <h1 class="grid_16">
+        <?= $this->translate('All domains of client %1$s', $this->html('identity/label')) ?>
+    </h1>
+    <div class="cssListing cssForm grid_16">
+        <div class="grid_16 alpha omega cssHeaderList">
+            <div class="grid_16 alpha omega cssAction">
+                <h3>
+                    <?= $this->translate('actions') ?>
+                </h3>
+            </div>
+        </div>
+
+        <ul class="grid_16 cssFormBoxLong">
+            <? foreach($this->domains as $id => $domain): ?>
+            <li class="grid_16 alpha omega">
+                <div class="grid_16 cssDomainList ">
+                    <div class="grid_10 alpha omega cssDomain">
+                        <?= $domain->html('name') ?>
+                    </div>
+                    <div class="grid_6 alpha omega cssAction">
+                        <a href="<?= $this->url(array(), 'mazelab-nginx_vhosts') ?>?term=<?= $domain->html('name'); ?>"
+                           class="cssIcon jsButton cssIconVHost" 
+                           id="jsVHost-<?= $domain->html('name'); ?>"
+                           title="<?= $this->translate('Show virtual hosts') ?>">
+                            <?= $this->translate('Virtual hosts') ?>
+                        </a>
+                    </div>
+                </div>
+            </li>
+            <? endforeach; ?>
+        </ul>
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.jsButton').button();
+        $('.cssIconVHost').button({
+            icons: {primary: "ui-icon-home"}
+        });
+    });
+</script>

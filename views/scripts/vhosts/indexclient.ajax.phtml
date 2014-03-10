@@ -1,0 +1,55 @@
+<? foreach($this->html('pager/data') as $domainName => $vhosts): ?>
+<h4><?= $domainName ?></h4>
+    <? foreach($vhosts as $vhost): ?>
+    <li class="grid_16 alpha omega
+        <? if($vhost->toBool('delete')): ?>
+            cssStatusDelete
+        <? elseif($vhost->toBool('conflicted')): ?>
+            cssStatusConflicted
+        <? elseif($vhost->toBool('pending')): ?>
+            cssStatusPending
+        <? endif; ?>">
+        <div id="jsVHost-<?= $vhost->html("label"); ?>" class="grid_10 alpha omega">
+            <? if($vhost->toBool('delete')): ?>
+            <a class="jsVhostDetail grid_16">
+            <? else: ?>
+            <a class="jsVhostDetail grid_16" title="<?= $this->translate('edit') ?>"
+               href="<?= $this->url(array($vhost->html("_id")), "mazelab-nginx_detailVhost") ?>">
+            <? endif; ?>
+                <?= $vhost->html("label"); ?> 
+                <? if($vhost->toBool('pending') || $vhost->toBool('delete')): ?>
+                <div class="ui-icon ui-icon-refresh cssStatusIconPending"></div>
+                <? endif; ?>
+            </a>
+        </div>
+        <div class="grid_6 alpha omega cssAction">
+            <a class="cssAdditionalLink">
+                <? if ($vhost->toBool("status") == true): ?>
+                    <?= $this->translate("activated") ?>
+                <? else: ?>
+                    <?= $this->translate("deactivated") ?>
+                <? endif; ?>
+            </a>
+            <? if(!$vhost->toBool('delete')): ?>
+            <a href="<?= $this->url(array($vhost->html("_id")), "mazelab-nginx_detailVhost")?>"
+               class="jsIconDetail cssIconEdit cssIcon" title="<?= $this->translate("detail"); ?>">
+            </a>
+            <? endif; ?>
+        </div>
+    </li>
+    <? endforeach; ?>
+<? endforeach; ?>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".jsIconDetail").button({
+            icons: {primary: "ui-icon-document"},
+            text: false
+        });
+        
+        $('#searchInput').mazeSearch('option', 'page', '<?= $this->html('pager/page') ?>');
+        $('#searchInput').mazeSearch('option', 'total', '<?= $this->html('pager/total') ?>');
+        $('#searchInput').mazeSearch('option', 'limit', '<?= $this->html('pager/limit') ?>');
+        $('#searchInput').mazeSearch('option', 'lastPosition', '<?= $this->html('pager/lastPosition') ?>');
+    });
+</script>

@@ -1,0 +1,21 @@
+<? $this->headScript()->prependFile($this->baseUrl() . '/module/mazelab/nginx/js/codemirror/mode/nginx.js') ?>
+<? $this->headScript()->prependFile($this->baseUrl() . '/module/mazelab/nginx/js/codemirror/codemirror.js') ?>
+<? $this->headLink()->prependStylesheet($this->baseUrl() . '/module/mazelab/nginx/css/codemirror/codemirror.css') ?>
+<div class="cssContentMiddle grid_16">
+    <div class="grid_16 alpha omega cssHeaderList">
+        <h1 class="grid_8"><?= $this->html("vhost/label"); ?></h1>
+        <div class="grid_16 cssFont"><?= $this->translate('Virtual host of domain %1$s', $this->html("vhost/domainName")); ?></div>
+    </div>
+
+    <div class="cssDetailPadding30 cssForm grid_16">
+        <textarea id="vhostContent"><?= $this->html("vhost/content"); ?></textarea>
+    </div>
+</div>
+
+<script type="text/javascript">
+    CodeMirror.fromTextArea(document.getElementById("vhostContent"), {
+        lineNumbers: true,
+        readOnly: true,
+        mode: "nginx"
+    });
+</script>
