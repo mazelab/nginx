@@ -16,6 +16,7 @@ class MazelabNginx_ConfigController extends Zend_Controller_Action
         $ajaxContext->addActionContext('clientconfig', array('json', 'html'))
                     ->addActionContext('nodeconfig', array('json', 'html'))
                     ->addActionContext('domainconfig', array('json', 'html'))
+                    ->addActionContext('mainconfig', array('json', 'html'))
                     ->initContext();
     }
     
@@ -26,7 +27,11 @@ class MazelabNginx_ConfigController extends Zend_Controller_Action
     public function domainconfigAction()
     {
     }
-    
+
+    public function mainconfigAction()
+    {
+    }
+
     public function nodeconfigAction()
     {
     }
