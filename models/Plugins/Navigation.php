@@ -26,7 +26,7 @@ class MazelabNginx_Model_Plugins_Navigation extends Zend_Controller_Plugin_Abstr
     }
     
     /**
-     * custom behavior for client mail navigation
+     * custom behavior for client nginx navigation
      * 
      * @param Zend_Controller_Request_Abstract $request
      * @return void
@@ -38,7 +38,7 @@ class MazelabNginx_Model_Plugins_Navigation extends Zend_Controller_Plugin_Abstr
         if(($client && !$client->hasService('nginx')) || !MazelabNginx_Model_DiFactory::getDomainManager()->getDomains($this->_identity['_id'])) {
             $view = Zend_Layout::getMvcInstance()->getView();
             
-            $emailNavi = $view->navigation()->findById('mazelab-nginx_index');
+            $emailNavi = $view->navigation()->findOneBy('resource', 'mazelab-nginx_domains');
             
             $view->navigation()->removePage($emailNavi);
         }
