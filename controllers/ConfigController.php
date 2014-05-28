@@ -18,6 +18,8 @@ class MazelabNginx_ConfigController extends Zend_Controller_Action
                     ->addActionContext('domainconfig', array('json', 'html'))
                     ->addActionContext('mainconfig', array('json', 'html'))
                     ->initContext();
+
+        $this->_helper->layout->disableLayout();
     }
     
     public function clientconfigAction()
